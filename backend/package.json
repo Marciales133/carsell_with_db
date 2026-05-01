@@ -1,0 +1,27 @@
+{
+  "name": "carsell-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --env-file=.env src/server.js",
+    "migrate": "npx knex --knexfile knexfile.cjs migrate:latest",
+    "migrate:rollback": "npx knex --knexfile knexfile.cjs migrate:rollback",
+    "migrate:make": "npx knex --knexfile knexfile.cjs migrate:make"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "CarSell Full Stack",
+  "type": "module",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "knex": "^3.2.9",
+    "pg": "^8.20.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

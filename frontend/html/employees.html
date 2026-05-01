@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Sell || Employees</title>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_forward" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/employeesLayout.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="icon" type="image/png" href="../entities/image/carsell.png">
+</head>
+<body id="employeePage">
+  
+  <header class="padding-inline">
+    <div class="main-header">
+        <div class="logo-div-container" id="inside-logo">
+          <img src="../entities/image/carsell.png" alt="Web Logo" id="web-logo"> <h3>Car Sell</h3>
+        </div>
+        <nav>
+            <button onclick="window.location.href='../index.html'" class="nav-button nav-button-color dashboard-button">
+                <span><i class="fas fa-tachometer-alt"></i> Dashboard </span><div class="button-bar dashboard-button-bar"></div>
+            </button>
+            <button onclick="window.location.href='inventory.html'" class="nav-button nav-button-color inventory-button">
+                <span><i class="fas fa-archive"></i> Inventory </span><br><div class="button-bar inventory-button-bar"></div>
+            </button>
+            <button onclick="window.location.href='client.html'" class="nav-button nav-button-color client-button">
+                <span><i class="fas fa-box"></i> Client </span><div class="button-bar client-button-bar"></div>
+            </button>
+            <button onclick="window.location.href='sales.html'" class="nav-button nav-button-color sales-button">
+                <span><i class="fas fa-chart-line"></i> Sales</span> <div class="button-bar sales-button-bar"></div>
+            </button>
+            <button onclick="window.location.href='employees.html'" class="nav-button active-employees-button">
+                <span><i class="fas fa-users"></i> Employees </span><div class="active-bar active-bar active-employees"></div>
+            </button>
+            <button id="menu1" class="nav-button burger-nav-button">
+                <i class="fas fa-bars"></i>
+            </button>
+            <button id="menu2" class="nav-button burger-nav-button">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </div>
+    <div id="menu-bar" class="hidden-nav-bar">
+        <button onclick="window.location.href='../index.html'" class="nav-button nav-button-color dashboard-button">
+          <span><i class="fas fa-tachometer-alt"></i> Dashboard </span><div class="button-bar dashboard-button-bar"></div>
+        </button>
+        <button onclick="window.location.href='inventory.html'" class="nav-button nav-button-color inventory-button">
+            <span><i class="fas fa-archive"></i> Inventory </span><br><div class="button-bar inventory-button-bar"></div>
+        </button>
+        <button onclick="window.location.href='client.html'" class="nav-button nav-button-color client-button">
+            <span><i class="fas fa-box"></i> Client </span><div class="button-bar client-button-bar"></div>
+        </button>
+        <button onclick="window.location.href='sales.html'" class="nav-button nav-button-color sales-button">
+            <span><i class="fas fa-chart-line"></i> Sales</span> <div class="button-bar sales-button-bar"></div>
+        </button>
+        <button onclick="window.location.href='employees.html'" class="nav-button active-employees-button">
+          <span><i class="fas fa-users"></i> Employees </span><div class="active-bar active-bar active-employees"></div>
+        </button>
+    </div>
+  </header>
+
+  <div class="logo-div-container" id="outside-logo">
+    <img src="../entities/image/carsell.png" alt="Web Logo" id="web-logo"> <h6>Car Sell</h6>
+  </div>
+
+  <article id="side-bar" class="">
+    <h4>Navigation</h4>
+    <button onclick="window.location.href='../index.html'" class="nav-button nav-button-color dashboard-button">
+      <span><i class="fas fa-tachometer-alt"></i> Dashboard </span><div class="button-bar dashboard-button-bar"></div>
+    </button><br>
+    <button onclick="window.location.href='inventory.html'" class="nav-button nav-button-color inventory-button">
+        <span><i class="fas fa-archive"></i> Inventory </span><div class="button-bar inventory-button-bar"></div>
+    </button><br>
+    <button onclick="window.location.href='client.html'" class="nav-button nav-button-color client-button">
+        <span><i class="fas fa-box"></i> Client </span><div class="button-bar client-button-bar"></div>
+    </button><br>
+    <button onclick="window.location.href='sales.html'" class="nav-button nav-button-color sales-button">
+        <span><i class="fas fa-chart-line"></i> Sales</span> <div class="button-bar sales-button-bar"></div>
+    </button><br>
+    <button onclick="window.location.href='employees.html'" class="nav-button active-employees-button">
+      <span><i class="fas fa-users"></i> Employees </span><div class="active-bar active-bar active-employees"></div>
+    </button>
+  </article>
+
+  <main id="main">
+    <div class="title">
+      <h2>EMPLOYEES</h2> <button id="add" class="main-btn add"><i class="fa fa-plus"></i> <h4>Add New</h4></button>
+    </div>
+    <div class="main-content">
+      <div class="nav-contents">
+
+        <div class="boxes drop-box">
+          <label class="search-bar">
+            <i class="fa fa-search"></i><input id="searchInputEmployees" type="search" placeholder="Search Client:" autocomplete="on">
+          </label>
+          <div id="resultsEmployees" class="autocomplete-results">
+          </div>
+        </div>
+
+        <div  class="department-container boxes drop-box">
+          <div id="departmentContainer" class="custom-select" data-show="show-department">
+            <h6 class="dropbarTitle">Department</h6> <p class="left">&#9660;</p>
+          </div>
+          <div id="departmentOption" class="custom-option">
+            <div class="custom-option-body">
+              <p id="Administration">Administration</p>
+              <p id="Sales">Sales</p>
+              <p id="Marketing">Marketing</p>
+              <p id="Finance">Finance</p>
+              <p id="CustomerSupport">Customer Support</p>
+              <p id="Mechanics">Mechanics</p>
+              <p id="Drivers">Drivers</p>
+              <p id="Logistics">Logistics</p>
+              <p id="HumanResources">Human Resources</p>
+              <p id="ITSupport">IT Support</p>
+              <p id="Security">Security</p>
+              <p id="Cleaning&Maintenance">Cleaning & Maintenance</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="status-container boxes drop-box">
+          <div id="statusContainer" class="custom-select" data-show="show-status">
+            <h6 class="dropbarTitle">Status</h6> <p class="left">&#9660;</p>
+          </div>
+          <div id="statusOption" class="custom-option">
+            <div class="custom-option-body">
+              <p id="Active">Active</p>
+              <p id="On Leave">On Leave</p>
+              <p id="Suspended">Suspended</p>
+              <p id="Terminated">Terminated</p>
+              <p id="Training">Training</p>
+              <p id="Resigned">Resigned</p>
+              <p id="Probationary">Probationary</p>
+              <p id="Retired">Retired</p>
+            </div>
+          </div>
+        </div>
+      
+        <div class="shift-container boxes drop-box">
+          <div id="shiftContainer" class="custom-select" data-show="show">
+            <h6 class="dropbarTitle">Shift</h6> <p class="left">&#9660;</p>
+          </div>
+          <div id="shiftOption" class="custom-option">
+            <div class="custom-option-body">
+              <p  id="amShift">Shift: 8Am-3Pm</p>
+              <p  id="pmShift">Shift: 3Pm-11Pm</p>
+            </div>
+          </div>
+        </div>
+
+      </div>  
+
+      <div class="show-employees">
+      </div>
+    </div>
+    <div>
+      <div id="form" class="add-new-form boxes">
+        <div class="sub-title">
+          <button class="main-btn gray back"> <p class="left">&#9660;</p></button>
+          <h3>NEW EMPLOYEE</h3>
+          <h3></h3>
+        </div>
+        <label>
+          <h6>FULL NAME:</h6>
+          <input id="name" type="text" placeholder="Full Name:">
+        </label>
+        <label>
+          <h6>EMPLOYEE ID:</h6>
+          <input id="employeeId" type="text" placeholder="Emoloyee ID:">
+        </label>
+        <label>
+          <h6>AGE:</h6>
+          <input id="age" type="text" placeholder="Age:">
+        </label>
+        <label>
+          <h6>DATE OF BIRTH:</h6>
+          <input id="birthDate" type="date">
+        </label>
+
+        <div class="radio-container">
+          <h6>GENDER:</h6>
+          <div>
+            <label><input type="radio" name="gender" value="Male"> Male</label> 
+            <label><input type="radio" name="gender" value="Female"> Female</label>
+          </div>
+        </div>
+        <div class="radio-container">
+          <h6>CIVIL STATUS:</h6>
+          <div>
+            <label><input type="radio" name="civilStatus" value="Single"> Single</label> 
+            <label><input type="radio" name="civilStatus" value="Married"> Married</label>
+          </div>
+        </div>
+        
+        <label>
+          <h6>NATIONALITY:</h6>
+          <input id="nationality" type="text" placeholder="Nationality:">
+        </label>
+        <label>
+          <h6>CONTACT NUMBER:</h6>
+          <input id="contactNumber" type="number" placeholder="Contact Number:">
+        </label>
+        <label>
+          <h6>EMERGENCY CONTACT NUMBER:</h6>
+          <input id="emergencyContactNumber" type="text" placeholder="Emergency Contact Number:">
+        </label>
+        <label>
+          <h6>EMAIL ADDRESS:</h6>
+          <input id="emailAddress" type="text" placeholder="Email Address:">
+        </label>
+        <label>
+          <h6>CURRENT ADDRESS:</h6>
+          <input id="currentAddress" type="text" placeholder="Current Address:">
+        </label>
+        <label>
+          <h6>DATE HIRED:</h6>
+          <input id="dateHired" type="date" placeholder="Date Hired:">
+        </label>
+
+        <div  class="department-container boxes drop-box">
+          <div id="departmentContainer" class="custom-select" data-show="show-form-dropdown">
+            <h6 id="employeeStatus" class="dropbarTitle">EMPLOYEE STATUS</h6> <p class="left">&#9660;</p>
+          </div>
+          <div class="show4 custom-option">
+            <div class="custom-option-body">
+              <p>Regular</p>
+              <p>Provation</p>
+              <p>Contracted</p>
+              <p>Part-Time</p>
+            </div>
+          </div>
+        </div>
+
+        <label>
+          <h6>MANAGER:</h6>
+          <div class="boxesS droplist">
+            <label class="search-bar">
+              <input id="manager" type="search" placeholder="Salesman:" autocomplete="on">
+            </label>
+            <div class=" autocomplete-results z2">
+            </div>
+          </div>
+        </label>
+
+        <div  class="department-container boxes drop-box">
+          <div id="departmentContainer" class="custom-select" data-show="show-department">
+            <h6 id="department" class="dropbarTitle">DEPARTMENT</h6> <p class="left">&#9660;</p>
+          </div>
+          <div id="departmentOption" class="custom-option">
+            <div class="custom-option-body">
+              <p id="Administration">Administration</p>
+              <p id="Sales">Sales</p>
+              <p id="Marketing">Marketing</p>
+              <p id="Finance">Finance</p>
+              <p id="CustomerSupport">Customer Support</p>
+              <p id="Mechanics">Mechanics</p>
+              <p id="Drivers">Drivers</p>
+              <p id="Logistics">Logistics</p>
+              <p id="HumanResources">Human Resources</p>
+              <p id="ITSupport">IT Support</p>
+              <p id="Security">Security</p>
+              <p id="Cleaning&Maintenance">Cleaning & Maintenance</p>
+            </div>
+          </div>
+        </div>
+
+        <label>
+          <h6>POSITION:</h6>
+          <div class="boxesS droplist">
+            <label class="search-bar">
+              <input id="position" type="search" placeholder="Salesman:" autocomplete="on">
+            </label>
+            <div class=" autocomplete-results z2">
+            </div>
+          </div>
+        </label>
+
+        <div  class="department-container boxes drop-box">
+          <div id="departmentContainer" class="custom-select" data-show="show-form-dropdown">
+            <p id="shift" class="dropbarTitle">SHIFT</p> <p class="left">&#9660;</p>
+          </div>
+          <div class="show4 custom-option">
+            <div class="custom-option-body">
+              <p>Shift: 8Am-3Pm</p>
+              <p>Shift: 3Pm-11Pm</p>
+            </div>
+          </div>
+        </div>
+
+        <label>
+          <h6>WORK LOCATION:</h6>
+          <div class="boxesS droplist">
+            <label class="search-bar">
+              <input id="workLocation" type="search" placeholder="Salesman:" autocomplete="on">
+            </label>
+            <div class=" autocomplete-results z2">
+            </div>
+          </div>
+        </label>
+
+        <div  class="department-container boxes drop-box">
+          <div id="departmentContainer" class="custom-select" data-show="show-form-dropdown">
+            <h6 id="employeeType" class="dropbarTitle">EMPLOYEE TYPE</h6> <p class="left">&#9660;</p>
+          </div>
+          <div class="show4 custom-option">
+            <div class="custom-option-body">
+              <p>Office Stuff</p>
+              <p>Factory Worker</p>
+              <p>Field Personel</p>
+              <p>Remote</p>
+            </div>
+          </div>
+        </div>
+        
+        <label>
+          <h6>SSS:</h6>
+          <input id="sss" type="text" placeholder="SSS:">
+        </label>
+        <label>
+          <h6>TIN:</h6>
+          <input id="tin" type="text" placeholder="Tin:">
+        </label>
+        <label>
+          <h6>PHILHEALTH:</h6>
+          <input id="philHealth" type="text" placeholder="PhilHealth:">
+        </label>
+        <label>
+          <h6>PAG-IBIG:</h6>
+          <input id="pagIbig" type="text" placeholder="Pag-IBIG:">
+        </label>
+        <label>
+          <h6>NATIONAL ID:</h6>
+          <input id="nationalId" type="text" placeholder="National ID:">
+        </label>
+        <label>
+          <h6>BASIC SALARY:</h6>
+          <input id="basicSalary" type="text" placeholder="Basic Salary:">
+        </label>
+
+        <div  class="department-container boxes drop-box">
+          <div id="departmentContainer" class="custom-select" data-show="show-form-dropdown">
+            <h6 id="payType" class="dropbarTitle">PAY TYPE</h6> <p class="left">&#9660;</p>
+          </div>
+          <div class="show4 custom-option">
+            <div class="custom-option-body">
+              <p>Monthly</p>
+              <p>Every 2nd Week</p>
+              <p>Weekly</p>
+            </div>
+          </div>
+        </div>
+
+        <label>
+          <h6>PAYROLL CHANNEL:</h6>
+          <div class="boxesS droplist">
+            <label class="search-bar">
+              <input id="payrollChannel" type="search" placeholder="Salesman:" autocomplete="on">
+            </label>
+            <div class=" autocomplete-results z2">
+            </div>
+          </div>
+        </label>
+
+        <label>
+          <h6>SALARY LEVEL:</h6>
+          <div class="boxesS droplist">
+            <label class="search-bar">
+              <input id="salaryLevel" type="search" placeholder="Salesman:" autocomplete="on">
+            </label>
+            <div class=" autocomplete-results z2">
+            </div>
+          </div>
+        </label>
+
+        <label>
+          <h6>ALLOWANCES:</h6>
+          <div class="boxesS droplist">
+            <label class="search-bar">
+              <input id="allowances" type="search" placeholder="Salesman:" autocomplete="on">
+            </label>
+            <div class=" autocomplete-results z2">
+            </div>
+          </div>
+        </label>
+        
+        <div  class="department-container boxes drop-box">
+          <div id="departmentContainer" class="custom-select" data-show="show-form-dropdown">
+            <h6 id="status" class="dropbarTitle">STATUS</h6> <p class="left">&#9660;</p>
+          </div>
+          <div class="show4 custom-option">
+            <div class="custom-option-body">
+              <p>Active</p>
+              <p>Inactive</p>
+              <p>Terminated</p>
+              <p>Resigned</p>
+            </div>
+          </div>
+        </div>
+
+        <label>
+          <h6>REMARKS:</h6>
+          <input id="remarks" type="text" placeholder="Remarks:">
+        </label>
+
+        <label>
+          <h6>EMAIL FOR LOGIN:</h6>
+          <input id="loginEmail" type="text" placeholder="Email For Login:">
+        </label>
+
+        <div  class="department-container boxes drop-box">
+          <div id="departmentContainer" class="custom-select" data-show="show-form-dropdown">
+            <h6 id="systemRole" class="dropbarTitle">SYSTEM ROLE</h6> <p class="left">&#9660;</p>
+          </div>
+          <div class="show4 custom-option">
+            <div class="custom-option-body">
+              <p>Admin</p>
+              <p>Employee</p>
+              <p>Manager</p>
+            </div>
+          </div>
+        </div>
+
+        <label>
+          <h6>PASSWORD:</h6>
+          <input id="password" type="text" placeholder="Password:">
+        </label>
+
+        <label>
+          <h6>ACCESS PERMISSION:</h6>
+          <div class="boxesS droplist">
+            <label class="search-bar">
+              <input id="accessPermissions" type="search" placeholder="Salesman:" autocomplete="on">
+            </label>
+            <div class=" autocomplete-results z2">
+            </div>
+          </div>
+        </label>
+
+        <button id="submitNewEmployee" class="main-btn add">SUBMIT</button>
+      </div>
+      <button id="scrollTopBtn"><p class="up">&#9660;</p></button>
+    </div>
+    <footer>
+      <center>
+        <p>&copy; 2025 Car Sell DealerShip ~ All Rights Reserved.</p>
+      </center>
+    </footer>
+  </main>
+
+  <div id="form2" class="employee-information">
+    <div class="sub-title">
+      <button class="main-btn gray backInfo"> <p class="left">&#9660;</p></button>
+      <h3></h3>
+    </div>
+    <h6>EDIT EMPLOYEE DATA</h6>
+    <div class="contain-employee-information">
+      <label for="employeeName">
+        <h6>NAME:</h6>
+        <input type="text" id="EmployeeName"> 
+      </label>
+      <label for="employeeName">
+        <h6>AGE:</h6>
+        <input type="number" id="EmployeeAge">
+      </label>
+      <div class="gender-container">
+        <h6>GENDER:</h6>
+        <div class="gender-box">
+          <span><p>MALE:</p><input type="radio" name="EmployeeGender" value="Male"></span>
+          <span><p>FEMALE:</p><input type="radio" name="EmployeeGender" value="Female"></span>
+        </div>
+      </div>
+      <label for="employeeName">
+        <h6>EMPLOYEE ID:</h6>
+        <input type="text" id="EmployeeId">
+      </label>
+      <label for="employeeName">
+        <h6>BIRTDATE:</h6>
+        <input type="date" id="EmployeeBirthdate">
+      </label>
+      <div  class="department-container boxes drop-box">
+          <div id="departmentContainer" class="custom-select" data-show="show-form-dropdown">
+            <p>SIVIL STATUS: <span id="EmployeeSivilStatus" class="dropbarTitle"></span></p> <p class="left">&#9660;</p>
+          </div>
+          <div class="show4 custom-option">
+            <div class="custom-option-body">
+              <p>Single</p>
+              <p>Married</p>
+            </div>
+          </div>
+        </div>
+        <label for="employeeName">
+        <h6>NATIONALITY:</h6>
+        <input type="text" id="EmployeeNationality">
+      </label>
+      <label for="employeeName">
+        <h6>CONTACT NUMBER:</h6>
+        <input type="number" id="EmployeeContactNumber">
+      </label>
+      <label for="employeeName">
+        <h6>EMERGENCY CONTACT NO:</h6>
+        <input type="number" id="EmployeeEmergencyContactNumber">
+      </label>
+      <label for="employeeName">
+        <h6>EMAIL ADDRESS:</h6>
+        <input type="text" id="EmployeeEmailAddress">
+      </label>
+      <label for="employeeName">
+        <h6>CURRENT ADDRESS:</h6>
+        <input type="text" id="EmployeeCurrentAddress">
+      </label>
+      <label for="employeeName">
+        <h6>DATE HIRED:</h6>
+        <input type="date" id="EmployeeDateHired">
+      </label>
+      <div  class="department-container boxes drop-box">
+          <div id="departmentContainer" class="custom-select" data-show="show-form-dropdown">
+            <p>EMPLOYEE STATUS: <span id="EmployeeStatus" class="dropbarTitle"></span></p> <p class="left">&#9660;</p>
+          </div>
+          <div class="show4 custom-option">
+            <div class="custom-option-body">
+              <p>Regular</p>
+              <p>Provation</p>
+              <p>Contracted</p>
+              <p>Part-Time</p>
+            </div>
+          </div>
+        </div>
+      <label>
+        <h6>POSITION:</h6>
+        <div class="boxesS droplist">
+          <label class="search-bar">
+            <input id="EmployeePosition" type="search" placeholder="Salesman:" autocomplete="on">
+          </label>
+          <div class=" autocomplete-results z2">
+          </div>
+        </div>
+      </label>
+
+
+      <div  class="department-container boxes drop-box">
+          <div id="departmentContainer" class="custom-select" data-show="show-form-dropdown">
+            <p>DEPARTMENT: <span id="EmployeeDepartment" class="dropbarTitle"></span></p> <p class="left">&#9660;</p>
+          </div>
+          <div class="show4 custom-option">
+            <div class="custom-option-body">
+              <p>Administration</p>
+              <p>Sales</p>
+              <p>Marketing</p>
+              <p>Finance</p>
+              <p>Customer Support</p>
+              <p>Mechanics</p>
+              <p>Drivers</p>
+              <p>Logistics</p>
+              <p>Human Resources</p>
+              <p>IT Support</p>
+              <p>Security</p>
+              <p>Cleaning & Maintenance</p>
+            </div>
+          </div>
+      </div>
+      <label>
+        <h6>MANAGER:</h6>
+        <div class="boxesS droplist">
+          <label class="search-bar">
+            <input id="EmployeeManager" type="search" placeholder="Salesman:" autocomplete="on">
+          </label>
+          <div class=" autocomplete-results z2">
+          </div>
+        </div>
+      </label>
+
+
+      <div  class="department-container boxes drop-box">
+          <div id="departmentContainer" class="custom-select" data-show="show-form-dropdown">
+            <p id="EmployeeShift" class="dropbarTitle">SHIFT</p> <p class="left">&#9660;</p>
+          </div>
+          <div class="show4 custom-option">
+            <div class="custom-option-body">
+              <p>Shift: 8Am-3Pm</p>
+              <p>Shift: 3Pm-11Pm</p>
+            </div>
+          </div>
+      </div>
+      <label>
+        <h6>WORK LOCATION:</h6>
+        <div class="boxesS droplist">
+          <label class="search-bar">
+            <input id="EmployeeWorkLocation" type="search" placeholder="Salesman:" autocomplete="on">
+          </label>
+          <div class=" autocomplete-results z2">
+          </div>
+        </div>
+      </label>
+
+
+      <div  class="department-container boxes drop-box">
+          <div id="departmentContainer" class="custom-select" data-show="show-form-dropdown">
+            <p>EMPLOYEE TYPE: <span id="EmployeeType" class="dropbarTitle"></span></p> <p class="left">&#9660;</p>
+          </div>
+          <div class="show4 custom-option">
+            <div class="custom-option-body">
+              <p>Office Stuff</p>
+              <p>Factory Worker</p>
+              <p>Field Personel</p>
+              <p>Remote</p>
+            </div>
+          </div>
+      </div>
+      <label for="employeeName">
+        <h6>SSS:</h6>
+        <input type="text" id="EmployeeSSS">
+      </label>
+      <label for="employeeName">
+        <h6>TIN:</h6>
+        <input type="text" id="EmployeeTIN">
+      </label>
+      <label for="employeeName">
+        <h6>PHILHEALTH:</h6>
+        <input type="text" id="EmployeePhilHealth">
+      </label>
+      <label for="employeeName">
+        <h6>PAG-IBIG:</h6>
+        <input type="text" id="EmployeePagIbig">
+      </label>
+      <label for="employeeName">
+        <h6>NATIONAL ID:</h6>
+        <input type="text" id="EmployeeNationalId">
+      </label>
+      <label for="employeeName">
+        <h6>BASIC SALARY:</h6>
+        <input type="text" id="EmployeeBasicSalary">
+      </label>
+      <div  class="department-container boxes drop-box">
+          <div id="departmentContainer" class="custom-select" data-show="show-form-dropdown">
+            <p>PAY TYPE: <span id="EmployeePayType" class="dropbarTitle"></span></p> <p class="left">&#9660;</p>
+          </div>
+          <div class="show4 custom-option">
+            <div class="custom-option-body">
+              <p>Monthly</p>
+              <p>Every 2nd Week</p>
+              <p>Weekly</p>
+            </div>
+          </div>
+      </div>
+      <label>
+        <h6>PAYROLL CHANNEL:</h6>
+        <div class="boxesS droplist">
+          <label class="search-bar">
+            <input id="EmployeePayrollChannel" type="search" placeholder="Salesman:" autocomplete="on">
+          </label>
+          <div class=" autocomplete-results z2">
+          </div>
+        </div>
+      </label>
+      <label>
+        <h6>SALARY LEVEL:</h6>
+        <div class="boxesS droplist">
+          <label class="search-bar">
+            <input id="EmployeeSalaryLevel" type="search" placeholder="Salesman:" autocomplete="on">
+          </label>
+          <div class=" autocomplete-results z2">
+          </div>
+        </div>
+      </label>
+
+
+      <div  class="department-container boxes drop-box">
+          <div id="departmentContainer" class="custom-select" data-show="show-form-dropdown">
+            <p>DEDUCTION: <span id="EmployeeDeduction" class="dropbarTitle"></span></p> <p class="left">&#9660;</p>
+          </div>
+          <div class="show4 custom-option">
+            <div class="custom-option-body">
+              <p>None</p>
+              <p>Absences</p>
+              <p>Advance</p>
+            </div>
+          </div>
+      </div>
+      <label>
+        <h6>ALLOWANCES:</h6>
+        <div class="boxesS droplist">
+          <label class="search-bar">
+            <input id="EmployeeAllowance" type="search" placeholder="Salesman:" autocomplete="on">
+          </label>
+          <div class=" autocomplete-results z2">
+          </div>
+        </div>
+      </label>
+
+
+      <div  class="department-container boxes drop-box">
+          <div id="departmentContainer" class="custom-select" data-show="show-form-dropdown">
+            <p>STATUS: <span id="STATUS" class="dropbarTitle"></span></p> <p class="left">&#9660;</p>
+          </div>
+          <div class="show4 custom-option">
+            <div class="custom-option-body">
+              <p>Active</p>
+              <p>Inactive</p>
+              <p>Terminated</p>
+              <p>Resigned</p>
+            </div>
+          </div>
+      </div>
+      <label for="employeeName">
+        <h6>SEPARATION DATE:</h6>
+        <input type="text" id="EmployeeSeparationDate">
+      </label>
+      <label for="employeeName">
+        <h6>REMARKS:</h6>
+        <input type="text" id="EmployeeRemarks">
+      </label>
+      <label>
+        <h6>ACCESS PERMISSION:</h6>
+        <div class="boxesS droplist">
+          <label class="search-bar">
+            <input id="EmployeeAccessPermission" type="search" placeholder="Salesman:" autocomplete="on">
+          </label>
+          <div class=" autocomplete-results z2">
+          </div>
+        </div>
+      </label>
+      <div  class="department-container boxes drop-box">
+          <div id="departmentContainer" class="custom-select" data-show="show-form-dropdown">
+            <p>SYSTEM ROLE: <span id="EmployeeSystemRole" class="dropbarTitle"></span></p> <p class="left">&#9660;</p>
+          </div>
+          <div class="show4 custom-option">
+            <div class="custom-option-body">
+              <p>Admin</p>
+              <p>Employee</p>
+              <p>Manager</p>
+            </div>
+          </div>
+      </div>
+      <label for="employeeName">
+        <h6>EMAIL FOR LOGIN:</h6>
+        <input type="text" id="EmployeeEmailForLogin">
+      </label>
+      <label for="employeeName">
+        <h6>PASSWORD:</h6>
+        <input type="text" id="employeePassword">
+      </label>
+    </div>
+
+    <button class="main-btn orange-bg" id="save">SAVE CHANGES</button>
+  </div>
+  <div id="clock" class="manual-clock-in-out">
+    <div class="sub-title">
+      <button class="main-btn gray backInfo"> <p class="left">&#9660;</p></button>
+      <h3></h3>
+    </div>
+    <h6>CLOCK IN & OUT</h6>
+    <label for="AdminsPassword">
+        <p>ADMINS PASSWORD:</p>
+        <input type="text" id="AdminsPassword">
+      </label>
+      <label for="EmployeesClockPassword">
+        <p>EMPLOYEES PASSWORD:</p>
+        <input type="text" id="EmployeesClockPassword">
+      </label>
+      <div class="clockin-clockout-buttons">
+        <button class="main-btn green-bg" id="clockIn">CLOCK IN</button> 
+        <button class="main-btn orange-bg" id="clockOut">CLOCK OUT</button>
+      </div>
+  </div>
+
+  <script type="module" src="../js/index.js"></script>
+  <script type="module" src="../js/employee.js"></script>
+</body>
+</html>
