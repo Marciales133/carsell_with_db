@@ -24,24 +24,30 @@ export const getAllSales = async (req, res) => {
 
         // Filter by date range — mirrors your today/week/month/year frontend logic
         if (filter) {
-        const now = new Date();
-        now.setHours(0, 0, 0, 0);
+            const now = new Date();
+            now.setHours(0, 0, 0, 0);
 
-        if (filter === 'today') {
-            query = query.whereRaw('sale_date = ?', [now.toISOString().split('T')[0]]);
-        } else if (filter === 'week') {
-            const weekAgo = new Date(now);
-            weekAgo.setDate(weekAgo.getDate() - 7);
-            query = query.whereBetween('sale_date', [weekAgo, now]);
-        } else if (filter === 'month') {
-            const monthAgo = new Date(now);
-            monthAgo.setDate(monthAgo.getDate() - 31);
-            query = query.whereBetween('sale_date', [monthAgo, now]);
-        } else if (filter === 'year') {
-            const yearAgo = new Date(now);
-            yearAgo.setFullYear(yearAgo.getFullYear() - 1);
-            query = query.whereBetween('sale_date', [yearAgo, now]);
-        }
+            if (filter === 'today') {
+                query = query.whereRaw('sale_date = ?', [now.toISOString().split('T')[0]]);
+            } else if (filter === 'week') {
+                const weekAgo = new Date(now);
+                weekAgo.setDate(weekAgo.getDate() - 7);
+                const endOfDay = new Date(now);
+                endOfDay.setHours(23, 59, 59, 999);
+                query = query.whereBetween('sale_date', [weekAgo, endOfDay]);
+            } else if (filter === 'month') {
+                const monthAgo = new Date(now);
+                monthAgo.setDate(monthAgo.getDate() - 31);
+                const endOfDay = new Date(now);
+                endOfDay.setHours(23, 59, 59, 999);
+                query = query.whereBetween('sale_date', [monthAgo, endOfDay]);
+            } else if (filter === 'year') {
+                const yearAgo = new Date(now);
+                yearAgo.setFullYear(yearAgo.getFullYear() - 1);
+                const endOfDay = new Date(now);
+                endOfDay.setHours(23, 59, 59, 999);
+                query = query.whereBetween('sale_date', [yearAgo, endOfDay]);
+            }
         }
 
         const sales = await query;
@@ -87,12 +93,13 @@ export const createSale = async (req, res) => {
         if (car.in_stock < quantity) { await trx.rollback(); return res.status(400).json({ error: `Insufficient stock. Only ${car.in_stock} left.` }); }
 
         const today = new Date();
-        today.setHours(0, 0, 0, 0);
+        today.setUTCHours(0, 0, 0, 0);
+        const todayISO = today.toISOString().split('T')[0]; // '2026-05-04'
 
         // Insert the sale
         const [newSale] = await trx('sales')
         .insert({
-            sale_date: today,
+            sale_date: todayISO,
             profit,
             status: status || 'In-Progress',
             client_id,

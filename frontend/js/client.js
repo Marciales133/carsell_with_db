@@ -116,6 +116,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     keydown(event, inputClients, oneGoRenderClient, clientList, container, latestMatched, searchName, resultsBoxClients);
   });
 
+  // these are already correct since you're just calling the async function
   searchInputVehicleAddClient.addEventListener('input', () => eventlistenerSearchVehicle(searchInputVehicleAddClient, resultsFormVehicleAddClient));
   searchInputVehicleAddPurchase.addEventListener('input', () => eventlistenerSearchVehicle(searchInputVehicleAddPurchase, resultsFormVehicleAddPurchase));
   searchSalesmanAddClient.addEventListener('input', () => eventlistenerSearchSalesman(searchSalesmanAddClient, resultsFormSalesmanAddClient));
@@ -201,34 +202,75 @@ document.addEventListener("DOMContentLoaded", async function () {
 // ============================================================
 // SEARCH HELPERS
 // ============================================================
-function eventlistenerSearchSalesman(s, r) {
-  s.addEventListener("input", function () {
-    const query = s.value.trim();
-    if (query.length < 1) { r.innerHTML = " "; return; }
-    foundSalesman = findSalesman(query);
-    r.innerHTML = Object.entries(foundSalesman).map(([key]) => `<div>${key}</div>`).join('');
-    r.querySelectorAll('div').forEach(item => {
-      item.addEventListener('click', function () { s.value = item.textContent; r.innerHTML = " "; });
-    });
-  });
-}
+// ✅ FIXED
+// ============================================================
+// SEARCH HELPERS
+// ============================================================
+async function eventlistenerSearchVehicle(v, f) {
+  const query = v.value.trim();
+  if (query.length < 1) { f.innerHTML = " "; return; }
 
-function eventlistenerSearchVehicle(v, f) {
-  v.addEventListener("input", function () {
-    const query = v.value.trim();
-    if (query.length < 1) { f.innerHTML = " "; return; }
-    foundVehicle = findVehicle(query);
-    f.innerHTML = Object.entries(foundVehicle).map(([key]) => `<div>${key}</div>`).join('');
-    f.querySelectorAll('div').forEach(item => {
-      item.addEventListener('click', function () {
-        v.value = item.textContent;
-        total.forEach(t => { t.textContent = cars[v.value]?.price || 0; });
-        f.innerHTML = " ";
+  // If cars hasn't been populated yet, fetch directly
+  if (Object.keys(cars).length === 0) {
+    try {
+      const res  = await fetch(`${API}/cars`);
+      const data = await res.json();
+      data.forEach(car => {
+        const key = `${car.brand} ${car.model} ${car.year} ${car.color}`;
+        cars[key] = {
+          car_id: car.car_id, type: car.type, brand: car.brand,
+          model: car.model, year: car.year, color: car.color,
+          quantity: car.quantity, price: Number(car.price),
+          inStock: car.in_stock, sold: car.sold, reserved: car.reserved
+        };
       });
+    } catch (err) {
+      console.error('Failed to fetch cars:', err); return;
+    }
+  }
+
+  foundVehicle = findVehicle(query);
+  f.innerHTML = Object.entries(foundVehicle).map(([key]) => `<div>${key}</div>`).join('');
+  f.querySelectorAll('div').forEach(item => {
+    item.addEventListener('click', function () {
+      v.value = item.textContent;
+      total.forEach(t => { t.textContent = cars[v.value]?.price || 0; });
+      f.innerHTML = " ";
     });
   });
 }
 
+async function eventlistenerSearchSalesman(s, r) {
+  const query = s.value.trim();
+  if (query.length < 1) { r.innerHTML = " "; return; }
+
+  // If employeeList hasn't been populated yet, fetch directly
+  const { employeeList } = await import('./employee.js');
+  if (Object.keys(employeeList).length === 0) {
+    try {
+      const res  = await fetch(`${API}/employees`);
+      const data = await res.json();
+      data.forEach(emp => {
+        employeeList[emp.name] = {
+          employee_id: emp.employee_id,
+          department:  emp.department_name || '',
+          position:    emp.position_title  || '',
+        };
+      });
+    } catch (err) {
+      console.error('Failed to fetch employees:', err); return;
+    }
+  }
+
+  foundSalesman = findSalesman(query);
+  r.innerHTML = Object.entries(foundSalesman).map(([key]) => `<div>${key}</div>`).join('');
+  r.querySelectorAll('div').forEach(item => {
+    item.addEventListener('click', function () {
+      s.value = item.textContent;
+      r.innerHTML = " ";
+    });
+  });
+}
 // ============================================================
 // BIND CLIENT CARDS
 // ============================================================
